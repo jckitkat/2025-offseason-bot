@@ -7,8 +7,10 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import monologue.Monologue;
+import monologue.Logged;
 
-public class Robot extends TimedRobot {
+public class Robot extends TimedRobot  implements Logged{
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
