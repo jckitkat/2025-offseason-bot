@@ -7,22 +7,22 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import monologue.Monologue;
-import monologue.Logged;
 
-public class Robot extends TimedRobot  implements Logged{
-  private Command m_autonomousCommand;
+public class Robot extends TimedRobot{
+  private Command autonomousCommand;
 
-  private RobotContainer m_robotContainer;
+  private RobotContainer robotContainer;
 
   @Override
   public void robotInit() {
-    m_robotContainer = new RobotContainer();
+    robotContainer = new RobotContainer();
   }
 
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+
+    robotContainer.periodic();
   }
 
   @Override
@@ -36,10 +36,10 @@ public class Robot extends TimedRobot  implements Logged{
 
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    autonomousCommand = robotContainer.getAutonomousCommand();
 
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
+    if (autonomousCommand != null) {
+      autonomousCommand.schedule();
     }
   }
 
@@ -51,8 +51,8 @@ public class Robot extends TimedRobot  implements Logged{
 
   @Override
   public void teleopInit() {
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
+    if (autonomousCommand != null) {
+      autonomousCommand.cancel();
     }
   }
 

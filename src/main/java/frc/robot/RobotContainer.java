@@ -4,17 +4,33 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import frc.robot.subsystems.Drivetrain.Drivetrain;
+import monologue.Logged;
+import monologue.Monologue;
+import monologue.Annotations.Log;
 
-public class RobotContainer {
+public class RobotContainer implements Logged{
+  
+  @Log
+  Drivetrain drivetrain = new Drivetrain();
+  
   public RobotContainer() {
     configureBindings();
+
+    Monologue.setupMonologue(this, "Robot", false, true);
   }
 
   private void configureBindings() {}
 
   public Command getAutonomousCommand() {
     return Commands.print("No autonomous command configured");
+  }
+
+  public void periodic() {
+    Monologue.setFileOnly(DriverStation.isDSAttached() ? DriverStation.isFMSAttached() : false);
+    Monologue.updateAll();
   }
 }

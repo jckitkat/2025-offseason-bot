@@ -10,8 +10,11 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.util.Constants;
+import monologue.Annotations.Log;
+import monologue.Logged;
+import monologue.Monologue;
 
-public class Drivetrain extends SubsystemBase{
+public class Drivetrain extends SubsystemBase implements Logged{
     
     private final CANSparkMax leftLeader, leftFollower, rightLeader, rightFollower;
     private final RelativeEncoder leftEncoder, rightEncoder;
@@ -48,17 +51,22 @@ public class Drivetrain extends SubsystemBase{
 
     @Override
     public void periodic() {
-        
+        log("Right Encoder", rightEncoder.getPosition());
+        log("Left Encoder", leftEncoder.getPosition());
     }
 
     public void arcadeDrive(double forwardSpeed, double turnSpeed) {
+        log("Target forward speed", forwardSpeed);
+        log("Target turn speed", turnSpeed);
         differentialDrive.arcadeDrive(forwardSpeed, turnSpeed);
     }
 
+    @Log
     public double getLeftDistanceMeters() {
         return leftEncoder.getPosition();
     }
 
+    @Log
     public double getRightDistanceMeters() {
         return rightEncoder.getPosition();
     }
