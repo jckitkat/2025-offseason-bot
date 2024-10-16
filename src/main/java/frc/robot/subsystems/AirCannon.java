@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.PneumaticHub;
 import edu.wpi.first.wpilibj.PneumaticsControlModule;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -10,11 +11,13 @@ import monologue.Logged;
 
 public class AirCannon extends SubsystemBase implements Logged{
 
+    private final PneumaticHub pneumaticHub;
     private final Solenoid solenoid;
 
     public AirCannon() {
-        solenoid = new Solenoid(PneumaticsModuleType.REVPH, 0);
-        solenoid.setPulseDuration(2);
+        pneumaticHub = new PneumaticHub();
+        solenoid = pneumaticHub.makeSolenoid(0);
+        solenoid.setPulseDuration(1);
     }
 
     @Override
@@ -25,9 +28,15 @@ public class AirCannon extends SubsystemBase implements Logged{
     public Command fire() {
         return new InstantCommand(
             () -> {
-                solenoid.startPulse();
-            },
-            this
+                if (getPressure() > 12)
+                {
+                    solenoid.startPulse();
+                }
+            }
         );
+    }
+
+    public double getPressure() {
+        return pneumaticHub.getPressure(0);
     }
 }
