@@ -44,7 +44,10 @@ public class Drivetrain extends SubsystemBase implements Logged{
         rightFollower.follow(leftLeader);
 
         leftEncoder = leftLeader.getEncoder();
+        leftEncoder.setPosition(0);
+
         rightEncoder = rightLeader.getEncoder();
+        rightEncoder.setPosition(0);
 
         differentialDrive = new DifferentialDrive(leftLeader, rightLeader);
     }

@@ -14,8 +14,8 @@ import monologue.Annotations.Log;
 
 public class RobotContainer implements Logged{
   
-  @Log
-  Drivetrain drivetrain = new Drivetrain();
+  @Log Drivetrain drivetrain = new Drivetrain();
+  
   
   public RobotContainer() {
     configureBindings();
@@ -29,8 +29,7 @@ public class RobotContainer implements Logged{
     return Commands.print("No autonomous command configured");
   }
 
-  public void periodic() {
-    Monologue.setFileOnly(DriverStation.isDSAttached() ? DriverStation.isFMSAttached() : false);
+  public void loggingPeriodic() {
     Monologue.updateAll();
   }
 }
