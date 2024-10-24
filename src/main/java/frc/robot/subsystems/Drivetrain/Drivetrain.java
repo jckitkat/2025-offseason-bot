@@ -31,17 +31,19 @@ public class Drivetrain extends SubsystemBase implements Logged{
         leftFollower = new CANSparkMax(Constants.Drivetrain.LeftFollowerID, MotorType.kBrushless);
         leftFollower.restoreFactoryDefaults();
         leftFollower.setIdleMode(IdleMode.kBrake);
+        leftFollower.setInverted(false);
         leftFollower.follow(leftLeader);
 
         rightLeader = new CANSparkMax(Constants.Drivetrain.RightLeaderID, MotorType.kBrushless);
         rightLeader.restoreFactoryDefaults();
         rightLeader.setIdleMode(IdleMode.kBrake);
-        rightLeader.setInverted(false);
+        rightLeader.setInverted(true);
     
         rightFollower = new CANSparkMax(Constants.Drivetrain.RightFollowerID, MotorType.kBrushless);
         rightFollower.restoreFactoryDefaults();
         rightFollower.setIdleMode(IdleMode.kBrake);
-        rightFollower.follow(leftLeader);
+        rightFollower.setInverted(true);
+        rightFollower.follow(rightLeader);
 
         leftEncoder = leftLeader.getEncoder();
         leftEncoder.setPosition(0);

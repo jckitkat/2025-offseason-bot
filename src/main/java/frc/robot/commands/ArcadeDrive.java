@@ -19,7 +19,7 @@ public class ArcadeDrive extends Command{
 
     @Override
     public void execute() {
-        drivetrain.arcadeDrive(forwardSpeed.get(), turnSpeed.get());
+        drivetrain.arcadeDrive(forwardSpeed.get() * 0.5, turnSpeed.get() * 0.8);
     }
 
 }
